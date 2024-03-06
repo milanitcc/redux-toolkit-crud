@@ -13,6 +13,11 @@ const Cart = () => {
         dispatch(remove(id));
     }
 
+    if( products.length === 0 )
+    {
+        return <h2>Your cart is empty</h2>
+    }
+
     return (
         <div>
             <div className='row'>
