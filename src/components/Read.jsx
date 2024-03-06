@@ -32,7 +32,7 @@ export default function Read() {
                     <p className="card-text">{user.age}</p>
                     <p className="card-text">{user.gender}</p>
                     <button className="btn btn-primary" onClick={() => [setId(user.id), setShowPopup(true)]}>View</button>
-                    <button className="btn btn-primary">Edit</button>
+                    <Link to={`/edit/${user.id}`} className="btn btn-primary">Edit</Link>
                     <Link onClick={() => dispatch(deleteUser(user.id))} className="btn btn-primary">Delete</Link>
                 </div>
             </div>))}

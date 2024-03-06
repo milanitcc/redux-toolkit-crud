@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 function Navbar() {
 
     const allUsers = useSelector((state) => state.app.users)
+    const cartProducts = useSelector(state => state.cart)
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -21,11 +22,13 @@ function Navbar() {
                         <li className="nav-item">
                             <Link to="/read" className="nav-link">All ({allUsers.length})</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/products" className="nav-link">Products</Link>
+                        </li>
+                        <li className="justify-content-end">
+                            <Link to="/cart" className="nav-link">My Bag ({cartProducts.length})</Link>
+                        </li>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
