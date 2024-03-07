@@ -4,16 +4,29 @@ import StatusCode from "../utils/StatusCode";
 
 const initialState = {
     data: [],
-    status: StatusCode.IDLE
+    status: StatusCode.IDLE,
+    search: '',
+    filter: []
 };
 
 const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        // fetchProducts(state, action){
-        //     state.data = action.payload;
-        // }
+        setSearch(state, action) {
+            const products = JSON.parse(JSON.stringify(state.data));
+            const newData = products.filter((product) => {
+                return product.title.toLowerCase().match(action.payload.toLowerCase());
+            });
+            state.filter = newData;
+            state.search = action.payload
+        },
+        deleteProduct(state, action) {
+            const products = JSON.parse(JSON.stringify(state.data));
+
+            const newData = products.filter((product) => product.id !== action.payload);
+            state.filter = newData;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -22,7 +35,8 @@ const productSlice = createSlice({
         })
         .addCase(getProducts.fulfilled, (state, action) => {
             state.data = action.payload;
-            state.status = StatusCode.IDLE
+            state.filter = action.payload;
+            state.status = StatusCode.IDLE;
         })
         .addCase(getProducts.rejected, (state, action) => {
             state.status = StatusCode.ERROR
@@ -30,7 +44,7 @@ const productSlice = createSlice({
     }
 })
 
-export const {fetchProducts} = productSlice.actions;
+export const {setSearch, deleteProduct} = productSlice.actions;
 export default productSlice.reducer;
 
 export const getProducts = createAsyncThunk('products/get', async () => {

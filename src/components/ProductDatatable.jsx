@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Datatable from 'react-data-table-component';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts, setSearch, deleteProduct } from '../features/productSlice'
 
 const ProductDatatable = () => {
 
@@ -27,42 +29,20 @@ const ProductDatatable = () => {
         {
             name: "Actions",
             cell: (row) => (
-                <button className='btn btn-danger' onClick={() => handleDelete(row.id)}>Delete</button>
+                <button
+                    className='btn btn-danger'
+                    onClick={() => dispatch(deleteProduct(row.id))}
+                >Delete</button>
             )
         }
     ];
+    const {search, filter} = useSelector(state => state.products)
 
-    const [products, setProducts] = useState([]);
-    const [search, setSearch] = useState('');
-    const [filter, setFilter] = useState([]);
-
-    const getProducts = async() => {
-        try {
-            const req = await fetch("https://fakestoreapi.com/products");
-            const res = await req.json();
-            setProducts(res);
-            setFilter(res);
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getProducts();
-    }, []);
-
-    useEffect(() => {
-        const result = products.filter((product) => {
-            return product.title.toLowerCase().match(search.toLowerCase());
-        });
-
-        setFilter(result);
-    }, [search]);
-
-    const handleDelete = (id) => {
-        const newData = products.filter((product) => product.id !== id)
-        setFilter(newData);
-    }
+        dispatch(getProducts())
+    }, [dispatch]);
 
     const tableHeaderStyle = {
         headCells: {
@@ -96,7 +76,7 @@ const ProductDatatable = () => {
                         className='w-25 form-control'
                         placeholder='Search...'
                         value={search}
-                        onChange={(e) => setSearch(e.target.value)}
+                        onChange={(e) => dispatch(setSearch(e.target.value))}
                     />
                 }
                 subHeaderAlign='right'
