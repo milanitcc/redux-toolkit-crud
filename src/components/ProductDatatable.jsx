@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Datatable from 'react-data-table-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, setSearch, deleteProduct } from '../features/productSlice'
+import StatusCode from '../utils/StatusCode';
 
 const ProductDatatable = () => {
 
@@ -36,7 +37,7 @@ const ProductDatatable = () => {
             )
         }
     ];
-    const {search, filter} = useSelector(state => state.products)
+    const {search, filter, status} = useSelector(state => state.products)
 
     const dispatch = useDispatch();
 
@@ -52,6 +53,15 @@ const ProductDatatable = () => {
                 backgroundColor: '#ccc'
             }
         }
+    }
+
+    if( status === StatusCode.LOADING ) {
+        return (<h2>Loading...</h2>)
+    }
+
+    if( status === StatusCode.ERROR )
+    {
+        return <h2>Something went wrong. Try again later</h2>
     }
 
     return (
