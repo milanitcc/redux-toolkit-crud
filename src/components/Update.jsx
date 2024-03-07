@@ -29,7 +29,7 @@ function Update() {
                         className="form-control"
                         name="name"
                         value={updateData && updateData.name}
-                        onChange={newData}
+                        // onChange={newData}
                     />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
@@ -41,7 +41,7 @@ function Update() {
                         className="form-control"
                         name="email"
                         value={updateData && updateData.email}
-                        onChange={newData}
+                        // onChange={newData}
                     />
                     <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                 </div>
@@ -53,7 +53,7 @@ function Update() {
                         className="form-control"
                         name="age"
                         value={updateData && updateData.age}
-                        onChange={newData}
+                        // onChange={newData}
                     />
                 </div>
                 <div className="mb-3">
@@ -64,7 +64,7 @@ function Update() {
                         name="gender"
                         value="Male"
                         checked={updateData && updateData.gender === 'Male'}
-                        onChange={newData}
+                        // onChange={newData}
                     />
                     <label className="form-check-label" htmlFor="male">
                         Male
@@ -78,7 +78,7 @@ function Update() {
                         name="gender"
                         value="Female"
                         checked={updateData && updateData.gender === 'Female'}
-                        onChange={newData}
+                        // onChange={newData}
                     />
                     <label htmlFor="female" className="form-check-label">
                         Female

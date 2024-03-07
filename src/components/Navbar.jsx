@@ -25,6 +25,9 @@ function Navbar() {
                         <li className="nav-item">
                             <Link to="/products" className="nav-link">Products</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/products-datatable" className="nav-link">Products Datatable</Link>
+                        </li>
                         <li className="justify-content-end">
                             <Link to="/cart" className="nav-link">My Bag ({cartProducts.length})</Link>
                         </li>

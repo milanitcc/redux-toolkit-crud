@@ -6,6 +6,7 @@ import Read from './components/Read';
 import Update from './components/Update';
 import Product from './components/Product';
 import Cart from './components/Cart';
+import ProductDatatable from './components/ProductDatatable';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 					<Route exact path='/read' element={<Read />} />
 					<Route exact path='/edit/:id' element={<Update />} />
 					<Route exact path='/products' element={<Product />} />
+					<Route exact path='/products-datatable' element={<ProductDatatable />} />
 					<Route exact path='/cart' element={<Cart />} />
 				</Routes>
 			</BrowserRouter>
